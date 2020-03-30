@@ -98,14 +98,7 @@ class App extends Component {
         })
     }
 
-    //abc=(index)=>{
-    // this.setState({
-    //image_url:Data.data[index].image_url,
-    //region:Data.data[index].region,
-    //name:Data.data[index].name,
-    //price:Data.data[index].price
-    //})
-    //}
+
 
 //Function handling the change of date selected from calendar
     changeDate = (selectedDate) => {
