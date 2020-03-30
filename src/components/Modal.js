@@ -43,12 +43,15 @@ const MuiModal = (props) => {
         classes
     } = props;
 
-    const handleToggle = () => {
-        props.onModalToggle();
+    const handleOpen = () => {
+        props.onModalOpen();
     };
+    const handleClose = () => {
+        props.onModalClose()
+    }
     return ( <
         Dialog onClose = {
-            handleToggle
+            handleClose
         }
         aria-labelledby = "customized-dialog-title"
         open = {
@@ -73,10 +76,13 @@ const MuiModal = (props) => {
             classes.campaign
         }
         /> <
-        span >
-        Auto Chess <
-        Typography > US < /Typography> <
-        /span> <
+        span > {
+            props.modalContent.name
+        } <
+        Typography > {
+            props.modalContent.region
+        } < /Typography> < /
+        span > <
         /div> <
         Typography className = {
             classes.pricing
@@ -94,8 +100,8 @@ const MuiModal = (props) => {
                 float: 'right',
                 lineHeight: 2
             }
-        } > $100 < /span> <
-        /div>
+        } > $100 < /span> < /
+        div >
 
         <
         div >
@@ -111,8 +117,8 @@ const MuiModal = (props) => {
                 float: 'right',
                 lineHeight: 2
             }
-        } > $100 < /span> <
-        /div>
+        } > $100 < /span> < /
+        div >
 
         <
         div >
@@ -128,9 +134,9 @@ const MuiModal = (props) => {
                 float: 'right',
                 lineHeight: 2
             }
-        } > $100 < /span> <
-        /div>
-       <
+        } > $100 < /span> < /
+        div >
+        <
         /MuiDialogContent> <
         MuiDialogActions style = {
             {
@@ -139,12 +145,12 @@ const MuiModal = (props) => {
         } >
         <
         Button autoFocus onClick = {
-            handleToggle
+            handleClose
         }
         variant = "outlined" >
         Close <
-        /Button> <
-        /MuiDialogActions> <
+        /Button> < /
+        MuiDialogActions > <
         /Dialog>
 
     )

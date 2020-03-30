@@ -57,20 +57,26 @@ class App extends Component {
         openModal: false,
         createdOn: '',
         date: '',
-        index: '',
+        index: 0,
         image_url: '',
         region: '',
         name: '',
         price: '',
-        modalContent: {}
+        modalContent: {},
+        liveData:[],
+        pastData:[],
+        upcomingData:[],
+        modalIndex:''
 
     }
 
     //Function that handles the selection of tab
     handleChange = (event, newValue) => {
         this.setState({
-            value: newValue
+            value: newValue,
+            openCalendar:false
         })
+
     }
 
     //Function handling the opening of calendar
@@ -79,26 +85,58 @@ class App extends Component {
             openCalendar: !this.state.openCalendar,
             index: index
         })
-
-    }
+     }
 
 //Function handling the toggling of pricing modal
-    handleModalToggle = (index) => {
-        //this.abc(index);
+    handleModalOpen = (index) => {
         let obj = {};
-        obj.image_url = this.state.image_url;
-        obj.region = this.state.region;
-        obj.name = this.state.name;
-        obj.price = this.state.price;
-        console.log("object is", obj)
-
+        if(this.state.value==0)
+       obj=this.state.upcomingData[index]
+       else if(this.state.value==1)
+       obj=this.state.liveData[index]
+       else if(this.state.value==2)
+       obj=this.state.pastData[index]
         this.setState({
-            openModal: !this.state.openModal,
+            openModal: true,
             modalContent: obj
         })
     }
+    handleModalClose=()=>{
+    this.setState({
+                openModal: false
+            })
+    }
+     componentWillMount(){
+     this.handleDataDistribution();
+     }
 
+//Function to handle distribution of data according to dates
+handleDataDistribution=()=>{
+const past=[]
+const live=[]
+const upcoming=[]
+for(let i in Data.data)
+{
+        const d = new Date(Data.data[i].createdOn);
+		const a = new Date();
+		const diff = a.getTime() - d.getTime();
+		const days = Math.abs(Math.ceil((((diff / 1000) / 60) / 60) / 24))
+		if (diff > 0) {
+		past.push(Data.data[i]);
+} else if (days == 0) {
+			live.push(Data.data[i]);
+		} else
+		{			upcoming.push(Data.data[i]);
 
+		}
+
+}
+this.setState({
+liveData:live,
+upcomingData:upcoming,
+pastData:past
+})
+}
 
 //Function handling the change of date selected from calendar
     changeDate = (selectedDate) => {
@@ -106,7 +144,14 @@ class App extends Component {
             date: selectedDate,
             openCalendar:!this.state.openCalendar
         })
-        Data.data[this.state.index].createdOn = selectedDate;
+        const i=this.state.index;
+        if(this.state.value==0)
+        this.state.upcomingData[i].createdOn=selectedDate
+       else if(this.state.value==1)
+       this.state.liveData[i].createdOn=selectedDate
+        else if(this.state.value==2)
+        this.state.pastData[i].createdOn=selectedDate
+        this.handleDataDistribution();
     }
     render() {
 
@@ -146,7 +191,7 @@ class App extends Component {
 
             <
             Table rows = {
-                Data.data
+                this.state.upcomingData
             }
             onCalendarOpen = {
                 this.handleCalendarOpen
@@ -154,19 +199,39 @@ class App extends Component {
             openCalendar = {
                 this.state.openCalendar
             }
-            onModalToggle = {
-                this.handleModalToggle
-            }
-            />
+             onModalOpen = {
+                    this.handleModalOpen
+                            }
+               />
              <
             Table rows = {
-                Data.liveData
+                this.state.liveData
             }
+             onCalendarOpen = {
+                this.handleCalendarOpen
+                        }
+             openCalendar = {
+                 this.state.openCalendar
+                        }
+             onModalOpen = {
+                this.handleModalOpen
+                        }
+
             />
             <
             Table rows = {
-                Data.pastData
+                this.state.pastData
             }
+             onCalendarOpen = {
+               this.handleCalendarOpen
+                        }
+             openCalendar = {
+                this.state.openCalendar
+                        }
+             onModalOpen = {
+               this.handleModalOpen
+                        }
+
             />
             <
             /Tab>
@@ -175,6 +240,7 @@ class App extends Component {
                 this.state.openCalendar ?
                     <
                     DatePicker
+                    autoOk
                 orientation = "landscape"
                 variant = "static"
                 openTo = "date"
@@ -188,12 +254,10 @@ class App extends Component {
 
             } <
             /div> <
-            Modal onModalToggle = {
-                this.handleModalToggle
-            }
-            onModalClose = {
-                this.handleModalClose
-            }
+            Modal onModalOpen = {
+                this.handleModalOpen
+                                }
+                onModalClose={this.handleModalClose}
             modalContent = {
                 this.state.modalContent
             }
@@ -201,9 +265,7 @@ class App extends Component {
                 this.state.openModal
             }
             />
-
-
-            <
+             <
             /div> <
             /MuiThemeProvider> <
             /MuiPickersUtilsProvider>

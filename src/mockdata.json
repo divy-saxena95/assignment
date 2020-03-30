@@ -25,26 +25,25 @@
       "csv": "Some CSV link for Mole Slayer",
       "report": "Some report link for Mole Slayer",
       "image_url":"./src/assets/images/Real_racing.png"
-    }],
-    "liveData": [{
+    },
+    {
       "name": "Auto Chess",
       "region": "US",
-      "createdOn": 1585519922294,
+      "createdOn": 1588519922294,
       "price": "Price info of Test Whatsapp",
       "csv": "Some CSV link for Whatsapp",
       "report": "Some report link for Whatsapp",
       "image_url":"./src/assets/images/Auto_chess.png"
-    }
-    ],
-  "pastData": [{
-    "name": "Auto Chess",
-    "region": "US",
-    "createdOn": 1550807714999,
-    "price": "Price info of Test Whatsapp",
-    "csv": "Some CSV link for Whatsapp",
-    "report": "Some report link for Whatsapp",
-    "image_url":"../assets/images/Auto_chess.png"
-  },
+    },
+    {
+      "name": "Auto Chess",
+      "region": "US",
+      "createdOn": 1550807714999,
+      "price": "Price info of Test Whatsapp",
+      "csv": "Some CSV link for Whatsapp",
+      "report": "Some report link for Whatsapp",
+      "image_url":"../assets/images/Auto_chess.png"
+    },
     {
       "name": "Battle Grounds",
       "region": "CA, FR",
@@ -54,5 +53,5 @@
       "report": "Some report link for Super Jewels Ques",
       "image_url":"./src/assets/images/battleGrounds.png"
     }
-  ]
-}
+
+  ]}
