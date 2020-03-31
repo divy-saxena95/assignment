@@ -75,15 +75,17 @@ const MuiModal = (props) => {
             }
         } >
 
-        <
-        img src = {
-            require('../assets/images/Auto_chess.png')
-        }
-        alt = "image"
-        className = {
-            classes.campaign
-        }
-        /> <
+
+        {props.modalContent.image_url?<img src ={require('../assets/images/'+props.modalContent.image_url)}
+         alt = "image"
+                className = {
+                    classes.campaign
+                }
+            /> :
+            <img src=""/>
+            }
+
+            <
         span className={classes.text} >
           <Typography className={classes.contentText} > {
                              props.modalContent.name
