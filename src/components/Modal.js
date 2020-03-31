@@ -21,8 +21,8 @@ const styles = theme => ({
     },
     campaign: {
         marginRight: '4%',
-        width: '50%',
-        height: '70%'
+        width: '44%',
+        height: '100%'
     },
     content: {
         display: 'flex',
@@ -33,12 +33,19 @@ const styles = theme => ({
     pricing: {
         fontSize: 28,
         color: '#1D2951'
+    },
+    text:{
+    alignSelf:'flex-end'
+    },
+    contentText:{
+    fontSize:16
     }
 
 });
 
 
 const MuiModal = (props) => {
+
     const {
         classes
     } = props;
@@ -67,6 +74,7 @@ const MuiModal = (props) => {
                 display: 'flex'
             }
         } >
+
         <
         img src = {
             require('../assets/images/Auto_chess.png')
@@ -76,12 +84,19 @@ const MuiModal = (props) => {
             classes.campaign
         }
         /> <
-        span > {
-            props.modalContent.name
-        } <
-        Typography > {
+        span className={classes.text} >
+          <Typography className={classes.contentText} > {
+                             props.modalContent.name
+                         }
+                         </Typography>
+         <
+        Typography className={classes.contentText}  > {
+
             props.modalContent.region
-        } < /Typography> < /
+        } < /Typography>
+
+
+         < /
         span > <
         /div> <
         Typography className = {

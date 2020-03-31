@@ -100,7 +100,9 @@ class App extends Component {
             openModal: true,
             modalContent: obj
         })
+        console.log(obj)
     }
+
     handleModalClose=()=>{
     this.setState({
                 openModal: false

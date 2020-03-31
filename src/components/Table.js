@@ -130,10 +130,10 @@ const MuiTable = (props) => {
                     }
                 } >
                 <
-                img src = {
-                    require('../assets/images/Auto_chess.png')
-                }
-                alt = "image"
+                img src =
+                    {require('../assets/images/'+row.image_url)}
+
+
                 className = {
                     classes.campaign
                 }
